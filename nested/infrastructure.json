@@ -654,16 +654,6 @@
     "originName": "[toLower(trim(parameters('cdn.endpointoriginname')))]",
 	"trafficManagerHostName": "[toLower(trim(parameters('trafficManagerHostName')))]"
   },
-
-  "outputs": {
-    "infrastructure": {
-      "type": "object",
-      "value": {
-        "sqlServerFqdn": "[reference(concat('Microsoft.Sql/servers/', variables('dbServerNameTidy'))).fullyQualifiedDomainName]",
-        "webSqlServerFqdn": "[reference(concat('Microsoft.Sql/servers/', variables('webDbServerNameTidy'))).fullyQualifiedDomainName]"
-      }
-    }
-  },
   "resources": [
       {
 			"apiVersion": "2015-08-01",

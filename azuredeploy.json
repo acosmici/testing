@@ -58,10 +58,7 @@
       "minLength": 1,
       "defaultValue": "[resourceGroup().id]"
     },
-    "sqlServerFqdn": {
-      "type": "string",
-      "defaultValue": "[parameters('infrastructure').sqlServerFqdn]"
-    },
+    
     "sqlserver.login": {
       "type": "string",
       "minLength": 1
@@ -69,10 +66,6 @@
     "sqlserver.password": {
       "type": "securestring",
       "minLength": 8
-    },
-    "webSqlServerFqdn": {
-      "type": "string",
-      "defaultValue": "[parameters('infrastructure').webSqlServerFqdn]"
     },
     "web.sqlserver.login": {
       "type": "string",
@@ -1050,17 +1043,11 @@
     "passwordSalt": {
       "value": "[parameters('passwordSalt')]"
     },
-    "sqlServerFqdn": {
-      "value": "[parameters('sqlServerFqdn')]"
-    },
     "sqlserver.login": {
       "value": "[parameters('sqlserver.login')]"
     },
     "sqlserver.password": {
       "value": "[parameters('sqlserver.password')]"
-    },
-    "webSqlServerFqdn": {
-      "value": "[parameters('webSqlServerFqdn')]"
     },
     "web.sqlserver.login": {
       "value": "[parameters('web.sqlserver.login')]"
