@@ -775,8 +775,121 @@
           "Subnet": "[parameters('cdSubnetName')]"
         }
       }
+    },
+    {
+      "type": "Microsoft.Sql/servers",
+      "apiVersion": "[variables('dbApiVersion')]",
+      "properties": {
+        "administratorLogin": "[parameters('sqlserver.login')]",
+        "administratorLoginPassword": "[parameters('sqlserver.password')]",
+        "version": "[parameters('sqlserver.version')]"
+      },
+      "name": "[variables('dbServerNameTidy')]",
+      "location": "[parameters('location')]",
+      "tags": {
+        "provider": "[parameters('sitecoreTags').provider]"
+      },
+      "resources": [
+        {
+          "type": "firewallrules",
+          "apiVersion": "[variables('dbApiVersion')]",
+          "properties": {
+            "endIpAddress": "0.0.0.0",
+            "startIpAddress": "0.0.0.0"
+          },
+          "name": "AllowAllWindowsAzureIps",
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers', variables('dbServerNameTidy'))]"
+          ]
+        },
+        {
+          "type": "databases",
+          "apiVersion": "[variables('dbApiVersion')]",
+          "properties": {
+            "edition": "[parameters('resourceSizes').CoreSqlDatabase.Edition]",
+            "collation": "[parameters('sqldatabase.collation')]",
+            "maxSizeBytes": "[parameters('resourceSizes').CoreSqlDatabase.MaxSize]",
+            "requestedServiceObjectiveName": "[parameters('resourceSizes').CoreSqlDatabase.ServiceObjectiveLevel]"
+          },
+          "name": "[variables('coreDbNameTidy')]",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers', variables('dbServerNameTidy'))]"
+          ],
+          "tags": {
+            "provider": "[parameters('sitecoreTags').provider]"
+          }
+        },
+        {
+          "type": "databases",
+          "apiVersion": "[variables('dbApiVersion')]",
+          "properties": {
+            "edition": "[parameters('resourceSizes').MasterSqlDatabase.Edition]",
+            "collation": "[parameters('sqldatabase.collation')]",
+            "maxSizeBytes": "[parameters('resourceSizes').MasterSqlDatabase.MaxSize]",
+            "requestedServiceObjectiveName": "[parameters('resourceSizes').MasterSqlDatabase.ServiceObjectiveLevel]"
+          },
+          "name": "[variables('masterDbNameTidy')]",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers', variables('dbServerNameTidy'))]"
+          ],
+          "tags": {
+            "provider": "[parameters('sitecoreTags').provider]"
+          }
+        }
+      ]
+    },
+    {
+      "type": "Microsoft.Sql/servers",
+      "apiVersion": "[variables('dbApiVersion')]",
+      "properties": {
+        "administratorLogin": "[parameters('web.sqlserver.login')]",
+        "administratorLoginPassword": "[parameters('web.sqlserver.password')]",
+        "version": "[parameters('sqlserver.version')]"
+      },
+      "name": "[variables('webDbServerNameTidy')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Sql/servers', variables('dbServerNameTidy'))]"
+      ],
+      "tags": {
+        "provider": "[parameters('sitecoreTags').provider]"
+      },
+      "resources": [
+        {
+          "type": "firewallrules",
+          "apiVersion": "[variables('dbApiVersion')]",
+          "properties": {
+            "endIpAddress": "0.0.0.0",
+            "startIpAddress": "0.0.0.0"
+          },
+          "name": "AllowAllWindowsAzureIps",
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers', variables('webDbServerNameTidy'))]"
+          ]
+        },
+        {
+          "type": "databases",
+          "apiVersion": "[variables('dbApiVersion')]",
+          "properties": {
+            "edition": "[parameters('resourceSizes').WebSqlDatabase.Edition]",
+            "collation": "[parameters('sqldatabase.collation')]",
+            "maxSizeBytes": "[parameters('resourceSizes').WebSqlDatabase.MaxSize]",
+            "requestedServiceObjectiveName": "[parameters('resourceSizes').WebSqlDatabase.ServiceObjectiveLevel]"
+          },
+          "name": "[variables('webDbNameTidy')]",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers', variables('webDbServerNameTidy'))]"
+          ],
+          "tags": {
+            "provider": "[parameters('sitecoreTags').provider]"
+          }
+        }
+      ]
     }
-    
+
 
 
 
