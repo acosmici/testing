@@ -1127,6 +1127,22 @@
         "[resourceId('Microsoft.Web/sites', variables('cmWebAppNameTidy'))]",
         "[resourceId('Microsoft.Web/sites', variables('cdWebAppNameTidy'))]"
       ]
+    },
+    {
+      "type": "Microsoft.Search/searchServices",
+      "apiVersion": "[variables('searchApiVersion')]",
+      "name": "[variables('searchServiceNameTidy')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "replicaCount": "[parameters('resourceSizes').SearchService.Replicas]",
+        "partitionCount": "[parameters('resourceSizes').SearchService.Partitions]"
+      },
+      "sku": {
+        "name": "[toLower(parameters('resourceSizes').SearchService.SkuName)]"
+      },
+      "tags": {
+        "provider": "[parameters('sitecoreTags').provider]"
+      }
     }
 
 
