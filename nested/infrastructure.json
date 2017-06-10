@@ -633,6 +633,7 @@
   },
   "variables": {
     "webApiVersion": "2016-08-01",
+    "serverFarmApiVersion": "2016-09-01",
     "dbApiVersion": "2014-04-01-preview",
     "searchApiVersion": "2015-08-19",
     "redisApiVersion": "2016-04-01",
@@ -652,7 +653,7 @@
     "endpointName": "[toLower(trim(parameters('cdn.endpointname')))]",
     "profileName": "[toLower(trim(parameters('cdn.name')))]",
     "originName": "[toLower(trim(parameters('cdn.endpointoriginname')))]",
-	"trafficManagerHostName": "[toLower(trim(parameters('trafficManagerHostName')))]"
+    "trafficManagerHostName": "[toLower(trim(parameters('trafficManagerHostName')))]"
   },
   "resources": [
       {
@@ -723,60 +724,60 @@
 				}
 			}
 		},
- {
-			"type": "Microsoft.Web/serverfarms",
-			"name": "[variables('cmHostingPlanNameTidy')]",
-			"apiVersion": "[variables('webApiVersion')]",
-			"dependsOn": [
-				"[resourceId('Microsoft.Web/hostingEnvironments/', parameters('cmappServiceEnvironmentName'))]"
-			],
-			"kind": "app",
-			"sku": {
-				"name": "[parameters('resourceSizes').CmHostingPlan.SkuName]",
-				"capacity": "[parameters('resourceSizes').CmHostingPlan.SkuCapacity]",
-				"family": "P",
-				"size": "P3",
-				"tier": "Premium"
-			},
-			"properties": {
-				"name": "[variables('cmHostingPlanNameTidy')]",
-				"numberOfWorkers": 1,
-				"workerSize": "[parameters('ServerFarmWorkerSize')]",
-				"hostingEnvironment": "[parameters('cmappServiceEnvironmentName')]",
-				"hostingEnvironmentId": "[resourceId('Microsoft.Web/hostingEnvironments', parameters('cmappServiceEnvironmentName'))]"
-			},
-			"location": "[parameters('cm.ase.Location')]",
-			"tags": {
-				"provider": "[parameters('sitecoreTags').provider]"
-			}
-		},
-		{
-			"type": "Microsoft.Web/serverfarms",
-			"name": "[variables('cdHostingPlanNameTidy')]",
-			"apiVersion": "[variables('webApiVersion')]",
-			"dependsOn": [
-				"[resourceId('Microsoft.Web/hostingEnvironments/', parameters('cdappServiceEnvironmentName'))]"
-			],
-			"kind": "app",
-			"sku": {
-				"name": "[parameters('resourceSizes').CdHostingPlan.SkuName]",
-				"capacity": "[parameters('resourceSizes').CdHostingPlan.SkuCapacity]",
-				"family": "P",
-				"size": "P3",
-				"tier": "Premium"
-			},
-			"properties": {
-				"name": "[variables('cdHostingPlanNameTidy')]",
-				"numberOfWorkers": 1,
-				"worker1Size": "[parameters('ServerFarmWorkerSize')]",
-				"hostingEnvironment": "[parameters('cdappServiceEnvironmentName')]",
-				"hostingEnvironmentId": "[resourceId('Microsoft.Web/hostingEnvironments', parameters('cdappServiceEnvironmentName'))]"
-			},
-			"location": "[parameters('cd.ase.location')]",
-			"tags": {
-				"provider": "[parameters('sitecoreTags').provider]"
-			}
-		},
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "name": "[variables('cmHostingPlanNameTidy')]",
+      "apiVersion": "[variables('serverFarmApiVersion')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/hostingEnvironments/', parameters('cmappServiceEnvironmentName'))]"
+      ],
+      "kind": "app",
+      "sku": {
+        "name": "[parameters('resourceSizes').CmHostingPlan.SkuName]",
+        "capacity": "[parameters('resourceSizes').CmHostingPlan.SkuCapacity]",
+        "family": "P",
+        "size": "P3",
+        "tier": "Premium"
+      },
+      "properties": {
+        "name": "[variables('cmHostingPlanNameTidy')]",
+        "numberOfWorkers": 1,
+        "workerSize": "[parameters('ServerFarmWorkerSize')]",
+        "hostingEnvironment": "[parameters('cmappServiceEnvironmentName')]",
+        "hostingEnvironmentId": "[resourceId('Microsoft.Web/hostingEnvironments', parameters('cmappServiceEnvironmentName'))]"
+      },
+      "location": "[parameters('cm.ase.Location')]",
+      "tags": {
+        "provider": "[parameters('sitecoreTags').provider]"
+      }
+    },
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "name": "[variables('cdHostingPlanNameTidy')]",
+      "apiVersion": "[variables('serverFarmApiVersion')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/hostingEnvironments/', parameters('cdappServiceEnvironmentName'))]"
+      ],
+      "kind": "app",
+      "sku": {
+        "name": "[parameters('resourceSizes').CdHostingPlan.SkuName]",
+        "capacity": "[parameters('resourceSizes').CdHostingPlan.SkuCapacity]",
+        "family": "P",
+        "size": "P3",
+        "tier": "Premium"
+      },
+      "properties": {
+        "name": "[variables('cdHostingPlanNameTidy')]",
+        "numberOfWorkers": 1,
+        "worker1Size": "[parameters('ServerFarmWorkerSize')]",
+        "hostingEnvironment": "[parameters('cdappServiceEnvironmentName')]",
+        "hostingEnvironmentId": "[resourceId('Microsoft.Web/hostingEnvironments', parameters('cdappServiceEnvironmentName'))]"
+      },
+      "location": "[parameters('cd.ase.location')]",
+      "tags": {
+        "provider": "[parameters('sitecoreTags').provider]"
+      }
+    },
         {
 			"type": "Microsoft.Web/sites",
 			"name": "[variables('cmWebAppNameTidy')]",
