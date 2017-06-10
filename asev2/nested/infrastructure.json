@@ -379,14 +379,14 @@
     },
     "cmVNetAddressSpace": {
       "type": "string",
-      "defaultValue": "10.8.0.0/16",
+      "defaultValue": "10.12.0.0/16",
       "metadata": {
         "description": "The VNet address space for the CM VNet"
       }
     },
     "cmSubnetAddress": {
       "type": "string",
-      "defaultValue": "10.8.1.0/24",
+      "defaultValue": "10.12.1.0/24",
       "metadata": {
         "description": "The Subnet address space for the CM VNet"
       }
@@ -394,14 +394,14 @@
 
     "cdVNetAddressSpace": {
       "type": "string",
-      "defaultValue": "10.10.0.0/16",
+      "defaultValue": "10.14.0.0/16",
       "metadata": {
         "description": "The VNet address space for the CD VNet"
       }
     },
     "cdSubnetAddress": {
       "type": "string",
-      "defaultValue": "10.10.1.0/24",
+      "defaultValue": "10.14.1.0/24",
       "metadata": {
         "description": "The Subnet address space for the CD VNet"
       }
@@ -677,7 +677,7 @@
     "searchApiVersion": "2015-08-19",
     "redisApiVersion": "2016-04-01",
     "appInsightsApiVersion": "2015-05-01",
-    "aseApiVersion": "2015-08-01",
+    "aseApiVersion": "2016-09-01",
     "vnetApiVersion": "2015-06-15",
     "cmHostingPlanNameTidy": "[toLower(trim(parameters('cm.hostingplan.name')))]",
     "cdHostingPlanNameTidy": "[toLower(trim(parameters('cd.hostingplan.name')))]",
@@ -754,64 +754,35 @@
       "name": "[parameters('cmappServiceEnvironmentName')]",
       "type": "Microsoft.Web/hostingEnvironments",
       "location": "[parameters('cm.ase.Location')]",
+      "kind": "ASEV2",
+      "sku": "",
       "dependsOn": [
       ],
       "properties": {
         "name": "[parameters('cmappServiceEnvironmentName')]",
         "ipSslAddressCount": "[parameters('cmipSslAddressCount')]",
-        "workerPools": [
-          {
-            "workerSizeId": 0,
-            "workerSize": "[parameters('cmworker1Size')]",
-            "workerCount": "[parameters('cmworker1count')]"
-          },
-          {
-            "workerSizeId": 1,
-            "workerSize": "[parameters('cmworker2Size')]",
-            "workerCount": "[parameters('cmworker2count')]"
-          },
-          {
-            "workerSizeId": 2,
-            "workerSize": "[parameters('cmworker3Size')]",
-            "workerCount": "[parameters('cmworker3count')]"
-          }
-        ],
         "location": "[parameters('cm.ase.Location')]",
-        "MultiSize": "[parameters('cmfrontendSize')]",
-        "MultiRoleCount": "[parameters('cmfrontendCount')]",
+        "MultiSize": "0",
+        "MultiRoleCount": "0",
         "virtualNetwork": {
           "Id": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',parameters('cmVNetResourceGroupName'),'/providers/Microsoft.Network/virtualNetworks/', parameters('cmvnetName'))]",
           "Subnet": "[parameters('cmSubnetName')]"
         }
       }
     },
+
     {
       "apiVersion": "[variables('aseApiVersion')]",
       "name": "[parameters('cdappServiceEnvironmentName')]",
       "type": "Microsoft.Web/hostingEnvironments",
       "location": "[parameters('cd.ase.Location')]",
+      "kind": "ASEV2",
+      "sku": "",
       "dependsOn": [
       ],
       "properties": {
         "name": "[parameters('cdappServiceEnvironmentName')]",
         "ipSslAddressCount": "[parameters('cdipSslAddressCount')]",
-        "workerPools": [
-          {
-            "workerSizeId": 0,
-            "workerSize": "[parameters('cdworker1Size')]",
-            "workerCount": "[parameters('cdworker1count')]"
-          },
-          {
-            "workerSizeId": 1,
-            "workerSize": "[parameters('cdworker2Size')]",
-            "workerCount": "[parameters('cdworker2count')]"
-          },
-          {
-            "workerSizeId": 2,
-            "workerSize": "[parameters('cdworker3Size')]",
-            "workerCount": "[parameters('cdworker3count')]"
-          }
-        ],
         "location": "[parameters('cd.ase.Location')]",
         "MultiSize": "[parameters('cdfrontendSize')]",
         "MultiRoleCount": "[parameters('cdfrontendCount')]",
@@ -975,15 +946,14 @@
       ],
       "kind": "app",
       "sku": {
-        "name": "[parameters('resourceSizes').CmHostingPlan.SkuName]",
-        "capacity": "[parameters('resourceSizes').CmHostingPlan.SkuCapacity]",
-        "family": "P",
-        "size": "P3",
-        "tier": "Premium"
+        "Name": "I1",
+        "Tier": "Isolated"
       },
       "properties": {
         "name": "[variables('cmHostingPlanNameTidy')]",
         "numberOfWorkers": 1,
+        "reserved": false,
+        "workerSizeId": "0",
         "workerSize": "[parameters('ServerFarmWorkerSize')]",
         "hostingEnvironment": "[parameters('cmappServiceEnvironmentName')]",
         "hostingEnvironmentId": "[resourceId('Microsoft.Web/hostingEnvironments', parameters('cmappServiceEnvironmentName'))]"
@@ -1002,15 +972,14 @@
       ],
       "kind": "app",
       "sku": {
-        "name": "[parameters('resourceSizes').CdHostingPlan.SkuName]",
-        "capacity": "[parameters('resourceSizes').CdHostingPlan.SkuCapacity]",
-        "family": "P",
-        "size": "P3",
-        "tier": "Premium"
+        "Name": "I1",
+        "Tier": "Isolated"
       },
       "properties": {
         "name": "[variables('cdHostingPlanNameTidy')]",
         "numberOfWorkers": 1,
+        "reserved": false,
+        "workerSizeId": "0",
         "worker1Size": "[parameters('ServerFarmWorkerSize')]",
         "hostingEnvironment": "[parameters('cdappServiceEnvironmentName')]",
         "hostingEnvironmentId": "[resourceId('Microsoft.Web/hostingEnvironments', parameters('cdappServiceEnvironmentName'))]"
