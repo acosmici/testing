@@ -995,7 +995,6 @@
       "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Web/hostingEnvironments/', parameters('cmappServiceEnvironmentName'))]",
-        "[resourceId('Microsoft.Web/hostingEnvironments/', parameters('cdappServiceEnvironmentName'))]",
         "[resourceId('Microsoft.Web/serverfarms', variables('cmHostingPlanNameTidy'))]"
       ],
       "tags": {
@@ -1019,7 +1018,6 @@
       },
       "location": "[parameters('cd.ase.location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Web/hostingEnvironments/', parameters('cmappServiceEnvironmentName'))]",
         "[resourceId('Microsoft.Web/hostingEnvironments/', parameters('cdappServiceEnvironmentName'))]",
         "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]"
       ],
