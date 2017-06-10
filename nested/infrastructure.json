@@ -614,7 +614,7 @@
 					"Searchservice": {
 						"SkuName": "Standard",
 						"Partitions": 1,
-						"Replicas": 1
+            "Replicas": 1
 					},
 					"RedisCache": {
 						"SkuName": "Standard",
@@ -922,23 +922,8 @@
       "tags": {
         "provider": "[parameters('sitecoreTags').provider]"
       }
-    },
-    {
-      "type": "Microsoft.Search/searchServices",
-      "apiVersion": "[variables('searchApiVersion')]",
-      "name": "[variables('searchServiceNameTidy')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "sku": {
-          "name": "[toLower(parameters('resourceSizes').SearchService.SkuName)]"
-        },
-        "replicaCount": "[parameters('resourceSizes').SearchService.Replicas]",
-        "partitionCount": "[parameters('resourceSizes').SearchService.Partitions]"
-      },
-      "tags": {
-        "provider": "[parameters('sitecoreTags').provider]"
-      }
     }
+    
 
     
 
