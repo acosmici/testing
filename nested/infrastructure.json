@@ -711,7 +711,9 @@
       "name": "[parameters('cmappServiceEnvironmentName')]",
       "type": "Microsoft.Web/hostingEnvironments",
       "location": "[parameters('cm.ase.Location')]",
-      "dependsOn": [],
+      "dependsOn": [
+        "resourceId('Microsoft.Network/virtualNetworks/'", "parameters('cmVNETName'))"
+      ],
       "properties": {
         "name": "[parameters('cmappServiceEnvironmentName')]",
         "ipSslAddressCount": "[parameters('cmipSslAddressCount')]",
@@ -746,7 +748,9 @@
       "name": "[parameters('cdappServiceEnvironmentName')]",
       "type": "Microsoft.Web/hostingEnvironments",
       "location": "[parameters('cd.ase.Location')]",
-      "dependsOn": [],
+      "dependsOn": [
+        "resourceId('Microsoft.Network/virtualNetworks/'", "parameters('cdVNETName'))"
+      ],
       "properties": {
         "name": "[parameters('cdappServiceEnvironmentName')]",
         "ipSslAddressCount": "[parameters('cdipSslAddressCount')]",
