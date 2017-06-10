@@ -537,14 +537,14 @@
     },
     "cmvnetName": {
       "type": "string",
-      "defaultValue": "cmvnetName",
+      "defaultValue": "cmvnetNameV2",
       "metadata": {
         "description": "The name of the VNET onto which to deploy the CM environment"
       }
     },
     "cdvnetName": {
       "type": "string",
-      "defaultValue": "cdvnetName",
+      "defaultValue": "cdvnetNameV2",
       "metadata": {
         "description": "The name of the VNET onto which to deploy the CD environment"
       }
