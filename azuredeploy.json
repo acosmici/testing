@@ -32,27 +32,35 @@
       "type": "securestring",
       "defaultValue": ""
     },
+    "deployVNet": {
+      "type": "string",
+      "defaultValue": "Yes",
+      "allowedValues": [
+        "Yes",
+        "No - use an existing VNet"
+      ]
+    },
     "deploymentId": {
-			"type": "string",
-			"defaultValue": "[resourceGroup().name]"
-		},
-		"location": {
-			"type": "string",
-			"defaultValue": "[resourceGroup().location]"
-		},
-		"cm.ase.location": {
-			"type": "string",
-			"defaultValue": "North Europe"
-		},
-		"cd.ase.location": {
-			"type": "string",
-			"defaultValue": "East US"
-		},
+      "type": "string",
+      "defaultValue": "[resourceGroup().name]"
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]"
+    },
+    "cm.ase.location": {
+      "type": "string",
+      "defaultValue": "North Europe"
+    },
+    "cd.ase.location": {
+      "type": "string",
+      "defaultValue": "East US"
+    },
 
     "sitecore.admin.password": {
       "type": "securestring",
       "minLength": 8,
-      "defaultValue":  "Cameron#12345"
+      "defaultValue": "Cameron#12345"
     },
     "passwordSalt": {
       "type": "securestring",
@@ -201,594 +209,594 @@
 
 
 
-		"cm.hostingplan.name": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-cm-hp')]"
-		},
-		"cd.hostingplan.name": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-cd-hp')]"
-		},
-		"cm.webapp.name": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-cm')]"
-		},
-		"cd.webapp.name": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-cd')]"
-		},
-		"cdn.name": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-cdn')]"
-		},
-		"cdn.endpointname": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-cdn-endpoint')]"
-		},
-		"cdn.endpointoriginname": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-cdn-endpoint-origin')]"
-		},
-		"sqlserver.name": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-sql')]"
-		},
-	
-		"web.sqlserver.name": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-web-sql')]"
-		},
-		
-		"core.sqldatabase.name": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-core-db')]"
-		},
-		"master.sqldatabase.name": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-master-db')]"
-		},
-		"web.sqldatabase.name": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-web-db')]"
-		},
-		"searchservice.name": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-as')]"
-		},
-		"rediscache.name": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-redis')]"
-		},
-		"applicationinsights.name": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-ai')]"
-		},
-		"applicationinsights.location": {
-			"type": "string",
-			"defaultValue": "North Europe",
-			"allowedValues": [
-				"East US",
-				"South Central US",
-				"North Europe",
-				"West Europe"
-			]
-		},
-		"cm.hostingplan.skuname": {
-			"type": "string",
-			"defaultValue": "P3"
-		},
-		"cm.hostingplan.skucapacity": {
-			"type": "int",
-			"defaultValue": 1
-		},
-		"cd.hostingplan.skuname": {
-			"type": "string",
-			"defaultValue": "P3"
-		},
-		"cd.hostingplan.skucapacity": {
-			"type": "int",
-			"defaultValue": 1
-		},
-		"searchservice.skuname": {
-			"type": "string",
-			"defaultValue": "Standard"
-		},
-		"sqlserver.version": {
-			"type": "string",
-			"defaultValue": "12.0"
-		},
-		"sqldatabase.collation": {
-			"type": "string",
-			"defaultValue": "SQL_Latin1_General_CP1_CI_AS"
-		},
-		"sqldatabase.edition": {
-			"type": "string",
-			"defaultValue": "Standard"
-		},
-		"sqldatabase.maxsize": {
-			"type": "string",
-			"defaultValue": "268435456000"
-		},
-		"sqldatabase.serviceobjectivelevel": {
-			"type": "string",
-			"defaultValue": "S3"
-		},
-		"searchservice.replicacount": {
-			"type": "int",
-			"defaultValue": 1
-		},
-		"searchservice.partitioncount": {
-			"type": "int",
-			"defaultValue": 1
-		},
-		"rediscache.skuname": {
-			"type": "string",
-			"defaultValue": "Standard"
-		},
-		"rediscache.skufamily": {
-			"type": "string",
-			"defaultValue": "C"
-		},
-		"rediscache.skucapacity": {
-			"type": "string",
-			"defaultValue": "1"
-		},
-		"sitecoreTags": {
-			"type": "object",
-			"defaultValue": {
-				"provider": "b51535c2-ab3e-4a68-95f8-e2e3c9a19299"
-			}
-		},
-		"trafficManagerName": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-tm')]"
-		},
-		"trafficManagerHostName": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-tmr.trafficmanager.net')]"
-		},
-		"trafficManagerRelativeName": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-tmr')]"
-		},
-		"trafficRoutingMethod": {
-			"type": "string",
-			"defaultValue": "Performance",
-			"allowedValues": [
-				"Performance",
-				"Weighted",
-				"Priority",
-				"Geographic"
-			]
-		},
-		"cmipSslAddressCount": {
-			"type": "int",
-			"defaultValue": 1,
-			"metadata": {
-				"description": "The number of IP Addresses to create for the environment"
-			}
-		},
-		"cdipSslAddressCount": {
-			"type": "int",
-			"defaultValue": 1,
-			"metadata": {
-				"description": "The number of IP Addresses to create for the environment"
-			}
-		},
-		"cmworker1Size": {
-			"type": "string",
-			"defaultValue": "medium",
-			"allowedValues": [
-				"small",
-				"medium",
-				"large"
-			],
-			"metadata": {
-				"description": "The size of VM to use for CM Worker Pool 1"
-			}
-		},
-		"cdworker1Size": {
-			"type": "string",
-			"defaultValue": "medium",
-			"allowedValues": [
-				"small",
-				"medium",
-				"large"
-			],
-			"metadata": {
-				"description": "The size of VM to use for CD Worker Pool 1"
-			}
-		},
-		"cmworker1count": {
-			"type": "int",
-			"defaultValue": 2,
-			"metadata": {
-				"description": "The number of VM to use for CM Worker Pool 1"
-			}
-		},
-		"cdworker1count": {
-			"type": "int",
-			"defaultValue": 2,
-			"metadata": {
-				"description": "The number of VM to use for CD Worker Pool 1"
-			}
-		},
-		"cmworker2Size": {
-			"type": "string",
-			"defaultValue": "medium",
-			"allowedValues": [
-				"small",
-				"medium",
-				"large"
-			],
-			"metadata": {
-				"description": "The size of VM to use for CM Worker Pool 2"
-			}
-		},
-		"cdworker2Size": {
-			"type": "string",
-			"defaultValue": "medium",
-			"allowedValues": [
-				"small",
-				"medium",
-				"large"
-			],
-			"metadata": {
-				"description": "The size of VM to use for CD Worker Pool 2"
-			}
-		},
-		"cmworker2count": {
-			"type": "int",
-			"defaultValue": 2,
-			"metadata": {
-				"description": "The number of VM to use for CM Worker Pool 2"
-			}
-		},
-		"cdworker2count": {
-			"type": "int",
-			"defaultValue": 2,
-			"metadata": {
-				"description": "The number of VM to use for CD Worker Pool 2"
-			}
-		},
-		"cmfrontendSize": {
-			"type": "string",
-			"defaultValue": "medium",
-			"allowedValues": [
-				"small",
-				"medium",
-				"large"
-			],
-			"metadata": {
-				"description": "The size of VM to use for CM FrontEnd Pool"
-			}
-		},
-		"cdfrontendSize": {
-			"type": "string",
-			"defaultValue": "medium",
-			"allowedValues": [
-				"small",
-				"medium",
-				"large"
-			],
-			"metadata": {
-				"description": "The size of VM to use for CD FrontEnd Pool"
-			}
-		},
-		"cmfrontendCount": {
-			"type": "int",
-			"defaultValue": 2,
-			"metadata": {
-				"description": "The number of VM to use for CM FrontEnd Pool"
-			}
-		},
-		"cdfrontendCount": {
-			"type": "int",
-			"defaultValue": 2,
-			"metadata": {
-				"description": "The number of VM to use for CD FrontEnd Pool"
-			}
-		},
-		"cmworker3Size": {
-			"type": "string",
-			"defaultValue": "large",
-			"allowedValues": [
-				"small",
-				"medium",
-				"large"
-			],
-			"metadata": {
-				"description": "The size of VM to use for CM Worker Pool 3"
-			}
-		},
-		"cdworker3Size": {
-			"type": "string",
-			"defaultValue": "large",
-			"allowedValues": [
-				"small",
-				"medium",
-				"large"
-			],
-			"metadata": {
-				"description": "The size of VM to use for CD Worker Pool 3"
-			}
-		},
-		"cmworker3count": {
-			"type": "int",
-			"defaultValue": 2,
-			"metadata": {
-				"description": "The number of VM to use for CM Worker Pool 3"
-			}
-		},
-		"cdworker3count": {
-			"type": "int",
-			"defaultValue": 2,
-			"metadata": {
-				"description": "The number of VM to use for CD Worker Pool 3"
-			}
-		},
-		"cmvnetName": {
-			"type": "string",
-			"defaultValue": "cmvnetName",
-			"metadata": {
-				"description": "The name of the VNET onto which to deploy the CM environment"
-			}
-		},
-		"cdvnetName": {
-			"type": "string",
-			"defaultValue": "cdvnetName",
-			"metadata": {
-				"description": "The name of the VNET onto which to deploy the CD environment"
-			}
-		},
-		"cmvnetResourceGroupName": {
-			"type": "string",
-			"defaultValue": "[resourceGroup().name]",
-			"metadata": {
-				"description": "The name of the Resource Group to which the VNET for CM has been deployed"
-			}
-		},
-		"cdvnetResourceGroupName": {
-			"type": "string",
-			"defaultValue": "[resourceGroup().name]",
-			"metadata": {
-				"description": "The name of the Resource Group to which the VNET for CD has been deployed"
-			}
-		},
-		"cmsubnetName": {
-			"type": "string",
-			"defaultValue": "cmsubnetName",
-			"metadata": {
-				"description": "The name of the Subnet onto which to deploy the CM environment"
-			}
-		},
-		"cdsubnetName": {
-			"type": "string",
-			"defaultValue": "cdsubnetName",
-			"metadata": {
-				"description": "The name of the Subnet onto which to deploy the CD environment"
-			}
-		},
-		"serverFarmWorkerSize": {
-			"type": "string",
-			"allowedValues": [
-				"small",
-				"medium",
-				"large"
-			],
-			"defaultValue": "medium",
-			"metadata": {
-				"description": "The size of the AppService Plan worker VMs"
-			}
-		},
-		"cmappServiceEnvironmentName": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-cmase1x')]",
-			"metadata": {
-				"description": "The name of the CM App Service Environment where the app service plan will be created."
-			}
-		},
-		"cdappServiceEnvironmentName": {
-			"type": "string",
-			"defaultValue": "[concat(parameters('deploymentId'), '-cdase1x')]",
-			"metadata": {
-				"description": "The name of the CD App Service Environment where the app service plan will be created."
-			}
-		},
-		"sitecoreSKU": {
-			"type": "string",
-			"defaultValue": "xM1",
-			"allowedValues": [
-				"xM1",
-				"xM2",
-				"xM3",
-				"xM4",
-				"xM5"
-			],
-			"metadata": {
-				"description": "Sitecore SKU controls the sizes and service levels of the provisioned resources"
-			}
-		},
-		"skuMap": {
-			"type": "secureObject",
-			"defaultValue": {
-				"xM1": {
-					"CmHostingPlan": {
-						"SkuName": "[parameters('cm.hostingplan.skuname')]",
-						"SkuCapacity": "[parameters('cm.hostingplan.skucapacity')]"
-					},
-					"CdHostingPlan": {
-						"SkuName": "[parameters('cd.hostingplan.skuname')]",
-						"SkuCapacity": "[parameters('cd.hostingplan.skucapacity')]"
-					},
-					"CoreSqlDatabase": {
-						"Edition": "[parameters('sqldatabase.edition')]",
-						"MaxSize": "[parameters('sqldatabase.maxsize')]",
-						"ServiceObjectiveLevel": "[parameters('sqldatabase.serviceobjectivelevel')]"
-					},
-					"MasterSqlDatabase": {
-						"Edition": "[parameters('sqldatabase.edition')]",
-						"MaxSize": "[parameters('sqldatabase.maxsize')]",
-						"ServiceObjectiveLevel": "[parameters('sqldatabase.serviceobjectivelevel')]"
-					},
-					"WebSqlDatabase": {
-						"Edition": "[parameters('sqldatabase.edition')]",
-						"MaxSize": "[parameters('sqldatabase.maxsize')]",
-						"ServiceObjectiveLevel": "[parameters('sqldatabase.serviceobjectivelevel')]"
-					},
-					"Searchservice": {
-						"SkuName": "[parameters('searchservice.skuname')]",
-						"Partitions": "[parameters('searchservice.partitioncount')]",
-						"Replicas": "[parameters('searchservice.replicacount')]"
-					},
-					"RedisCache": {
-						"SkuName": "[parameters('rediscache.skuname')]",
-						"SkuFamily": "[parameters('rediscache.skufamily')]",
-						"SkuCapacity": "[int(parameters('rediscache.skucapacity'))]"
-					}
-				},
-				"xM2": {
-					"CmHostingPlan": {
-						"SkuName": "B2",
-						"SkuCapacity": 1
-					},
-					"CdHostingPlan": {
-						"SkuName": "B2",
-						"SkuCapacity": 2
-					},
-					"CoreSqlDatabase": {
-						"Edition": "Standard",
-						"MaxSize": "268435456000",
-						"ServiceObjectiveLevel": "S1"
-					},
-					"MasterSqlDatabase": {
-						"Edition": "Standard",
-						"MaxSize": "268435456000",
-						"ServiceObjectiveLevel": "S1"
-					},
-					"WebSqlDatabase": {
-						"Edition": "Standard",
-						"MaxSize": "268435456000",
-						"ServiceObjectiveLevel": "S1"
-					},
-					"Searchservice": {
-						"SkuName": "Standard",
-						"Partitions": 1,
-						"Replicas": 1
-					},
-					"RedisCache": {
-						"SkuName": "Standard",
-						"SkuFamily": "C",
-						"SkuCapacity": 1
-					}
-				},
-				"xM3": {
-					"CmHostingPlan": {
-						"SkuName": "B2",
-						"SkuCapacity": 1
-					},
-					"CdHostingPlan": {
-						"SkuName": "B2",
-						"SkuCapacity": 3
-					},
-					"CoreSqlDatabase": {
-						"Edition": "Standard",
-						"MaxSize": "268435456000",
-						"ServiceObjectiveLevel": "S1"
-					},
-					"MasterSqlDatabase": {
-						"Edition": "Standard",
-						"MaxSize": "268435456000",
-						"ServiceObjectiveLevel": "S1"
-					},
-					"WebSqlDatabase": {
-						"Edition": "Standard",
-						"MaxSize": "268435456000",
-						"ServiceObjectiveLevel": "S1"
-					},
-					"Searchservice": {
-						"SkuName": "Standard",
-						"Partitions": 1,
-						"Replicas": 1
-					},
-					"RedisCache": {
-						"SkuName": "Standard",
-						"SkuFamily": "C",
-						"SkuCapacity": 1
-					}
-				},
-				"xM4": {
-					"CmHostingPlan": {
-						"SkuName": "B2",
-						"SkuCapacity": 1
-					},
-					"CdHostingPlan": {
-						"SkuName": "S3",
-						"SkuCapacity": 4
-					},
-					"CoreSqlDatabase": {
-						"Edition": "Standard",
-						"MaxSize": "268435456000",
-						"ServiceObjectiveLevel": "S1"
-					},
-					"MasterSqlDatabase": {
-						"Edition": "Standard",
-						"MaxSize": "268435456000",
-						"ServiceObjectiveLevel": "S1"
-					},
-					"WebSqlDatabase": {
-						"Edition": "Standard",
-						"MaxSize": "268435456000",
-						"ServiceObjectiveLevel": "S2"
-					},
-					"Searchservice": {
-						"SkuName": "Standard",
-						"Partitions": 1,
-						"Replicas": 1
-					},
-					"RedisCache": {
-						"SkuName": "Standard",
-						"SkuFamily": "C",
-						"SkuCapacity": 1
-					}
-				},
-				"xM5": {
-					"CmHostingPlan": {
-						"SkuName": "B2",
-						"SkuCapacity": 1
-					},
-					"CdHostingPlan": {
-						"SkuName": "S3",
-						"SkuCapacity": 8
-					},
-					"CoreSqlDatabase": {
-						"Edition": "Standard",
-						"MaxSize": "268435456000",
-						"ServiceObjectiveLevel": "S1"
-					},
-					"MasterSqlDatabase": {
-						"Edition": "Standard",
-						"MaxSize": "268435456000",
-						"ServiceObjectiveLevel": "S1"
-					},
-					"WebSqlDatabase": {
-						"Edition": "Standard",
-						"MaxSize": "268435456000",
-						"ServiceObjectiveLevel": "S3"
-					},
-					"Searchservice": {
-						"SkuName": "Standard",
-						"Partitions": 1,
-						"Replicas": 1
-					},
-					"RedisCache": {
-						"SkuName": "Standard",
-						"SkuFamily": "C",
-						"SkuCapacity": 1
-					}
-				}
-			}
-        }    
+    "cm.hostingplan.name": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-cm-hp')]"
+    },
+    "cd.hostingplan.name": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-cd-hp')]"
+    },
+    "cm.webapp.name": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-cm')]"
+    },
+    "cd.webapp.name": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-cd')]"
+    },
+    "cdn.name": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-cdn')]"
+    },
+    "cdn.endpointname": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-cdn-endpoint')]"
+    },
+    "cdn.endpointoriginname": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-cdn-endpoint-origin')]"
+    },
+    "sqlserver.name": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-sql')]"
+    },
+
+    "web.sqlserver.name": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-web-sql')]"
+    },
+
+    "core.sqldatabase.name": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-core-db')]"
+    },
+    "master.sqldatabase.name": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-master-db')]"
+    },
+    "web.sqldatabase.name": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-web-db')]"
+    },
+    "searchservice.name": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-as')]"
+    },
+    "rediscache.name": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-redis')]"
+    },
+    "applicationinsights.name": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-ai')]"
+    },
+    "applicationinsights.location": {
+      "type": "string",
+      "defaultValue": "North Europe",
+      "allowedValues": [
+        "East US",
+        "South Central US",
+        "North Europe",
+        "West Europe"
+      ]
+    },
+    "cm.hostingplan.skuname": {
+      "type": "string",
+      "defaultValue": "P3"
+    },
+    "cm.hostingplan.skucapacity": {
+      "type": "int",
+      "defaultValue": 1
+    },
+    "cd.hostingplan.skuname": {
+      "type": "string",
+      "defaultValue": "P3"
+    },
+    "cd.hostingplan.skucapacity": {
+      "type": "int",
+      "defaultValue": 1
+    },
+    "searchservice.skuname": {
+      "type": "string",
+      "defaultValue": "Standard"
+    },
+    "sqlserver.version": {
+      "type": "string",
+      "defaultValue": "12.0"
+    },
+    "sqldatabase.collation": {
+      "type": "string",
+      "defaultValue": "SQL_Latin1_General_CP1_CI_AS"
+    },
+    "sqldatabase.edition": {
+      "type": "string",
+      "defaultValue": "Standard"
+    },
+    "sqldatabase.maxsize": {
+      "type": "string",
+      "defaultValue": "268435456000"
+    },
+    "sqldatabase.serviceobjectivelevel": {
+      "type": "string",
+      "defaultValue": "S3"
+    },
+    "searchservice.replicacount": {
+      "type": "int",
+      "defaultValue": 1
+    },
+    "searchservice.partitioncount": {
+      "type": "int",
+      "defaultValue": 1
+    },
+    "rediscache.skuname": {
+      "type": "string",
+      "defaultValue": "Standard"
+    },
+    "rediscache.skufamily": {
+      "type": "string",
+      "defaultValue": "C"
+    },
+    "rediscache.skucapacity": {
+      "type": "string",
+      "defaultValue": "1"
+    },
+    "sitecoreTags": {
+      "type": "object",
+      "defaultValue": {
+        "provider": "b51535c2-ab3e-4a68-95f8-e2e3c9a19299"
+      }
+    },
+    "trafficManagerName": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-tm')]"
+    },
+    "trafficManagerHostName": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-tmr.trafficmanager.net')]"
+    },
+    "trafficManagerRelativeName": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-tmr')]"
+    },
+    "trafficRoutingMethod": {
+      "type": "string",
+      "defaultValue": "Performance",
+      "allowedValues": [
+        "Performance",
+        "Weighted",
+        "Priority",
+        "Geographic"
+      ]
+    },
+    "cmipSslAddressCount": {
+      "type": "int",
+      "defaultValue": 1,
+      "metadata": {
+        "description": "The number of IP Addresses to create for the environment"
+      }
+    },
+    "cdipSslAddressCount": {
+      "type": "int",
+      "defaultValue": 1,
+      "metadata": {
+        "description": "The number of IP Addresses to create for the environment"
+      }
+    },
+    "cmworker1Size": {
+      "type": "string",
+      "defaultValue": "medium",
+      "allowedValues": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "metadata": {
+        "description": "The size of VM to use for CM Worker Pool 1"
+      }
+    },
+    "cdworker1Size": {
+      "type": "string",
+      "defaultValue": "medium",
+      "allowedValues": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "metadata": {
+        "description": "The size of VM to use for CD Worker Pool 1"
+      }
+    },
+    "cmworker1count": {
+      "type": "int",
+      "defaultValue": 2,
+      "metadata": {
+        "description": "The number of VM to use for CM Worker Pool 1"
+      }
+    },
+    "cdworker1count": {
+      "type": "int",
+      "defaultValue": 2,
+      "metadata": {
+        "description": "The number of VM to use for CD Worker Pool 1"
+      }
+    },
+    "cmworker2Size": {
+      "type": "string",
+      "defaultValue": "medium",
+      "allowedValues": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "metadata": {
+        "description": "The size of VM to use for CM Worker Pool 2"
+      }
+    },
+    "cdworker2Size": {
+      "type": "string",
+      "defaultValue": "medium",
+      "allowedValues": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "metadata": {
+        "description": "The size of VM to use for CD Worker Pool 2"
+      }
+    },
+    "cmworker2count": {
+      "type": "int",
+      "defaultValue": 2,
+      "metadata": {
+        "description": "The number of VM to use for CM Worker Pool 2"
+      }
+    },
+    "cdworker2count": {
+      "type": "int",
+      "defaultValue": 2,
+      "metadata": {
+        "description": "The number of VM to use for CD Worker Pool 2"
+      }
+    },
+    "cmfrontendSize": {
+      "type": "string",
+      "defaultValue": "medium",
+      "allowedValues": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "metadata": {
+        "description": "The size of VM to use for CM FrontEnd Pool"
+      }
+    },
+    "cdfrontendSize": {
+      "type": "string",
+      "defaultValue": "medium",
+      "allowedValues": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "metadata": {
+        "description": "The size of VM to use for CD FrontEnd Pool"
+      }
+    },
+    "cmfrontendCount": {
+      "type": "int",
+      "defaultValue": 2,
+      "metadata": {
+        "description": "The number of VM to use for CM FrontEnd Pool"
+      }
+    },
+    "cdfrontendCount": {
+      "type": "int",
+      "defaultValue": 2,
+      "metadata": {
+        "description": "The number of VM to use for CD FrontEnd Pool"
+      }
+    },
+    "cmworker3Size": {
+      "type": "string",
+      "defaultValue": "large",
+      "allowedValues": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "metadata": {
+        "description": "The size of VM to use for CM Worker Pool 3"
+      }
+    },
+    "cdworker3Size": {
+      "type": "string",
+      "defaultValue": "large",
+      "allowedValues": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "metadata": {
+        "description": "The size of VM to use for CD Worker Pool 3"
+      }
+    },
+    "cmworker3count": {
+      "type": "int",
+      "defaultValue": 2,
+      "metadata": {
+        "description": "The number of VM to use for CM Worker Pool 3"
+      }
+    },
+    "cdworker3count": {
+      "type": "int",
+      "defaultValue": 2,
+      "metadata": {
+        "description": "The number of VM to use for CD Worker Pool 3"
+      }
+    },
+    "cmvnetName": {
+      "type": "string",
+      "defaultValue": "cmvnetName",
+      "metadata": {
+        "description": "The name of the VNET onto which to deploy the CM environment"
+      }
+    },
+    "cdvnetName": {
+      "type": "string",
+      "defaultValue": "cdvnetName",
+      "metadata": {
+        "description": "The name of the VNET onto which to deploy the CD environment"
+      }
+    },
+    "cmvnetResourceGroupName": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().name]",
+      "metadata": {
+        "description": "The name of the Resource Group to which the VNET for CM has been deployed"
+      }
+    },
+    "cdvnetResourceGroupName": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().name]",
+      "metadata": {
+        "description": "The name of the Resource Group to which the VNET for CD has been deployed"
+      }
+    },
+    "cmsubnetName": {
+      "type": "string",
+      "defaultValue": "cmsubnetName",
+      "metadata": {
+        "description": "The name of the Subnet onto which to deploy the CM environment"
+      }
+    },
+    "cdsubnetName": {
+      "type": "string",
+      "defaultValue": "cdsubnetName",
+      "metadata": {
+        "description": "The name of the Subnet onto which to deploy the CD environment"
+      }
+    },
+    "serverFarmWorkerSize": {
+      "type": "string",
+      "allowedValues": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "defaultValue": "medium",
+      "metadata": {
+        "description": "The size of the AppService Plan worker VMs"
+      }
+    },
+    "cmappServiceEnvironmentName": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-cmase1x')]",
+      "metadata": {
+        "description": "The name of the CM App Service Environment where the app service plan will be created."
+      }
+    },
+    "cdappServiceEnvironmentName": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('deploymentId'), '-cdase1x')]",
+      "metadata": {
+        "description": "The name of the CD App Service Environment where the app service plan will be created."
+      }
+    },
+    "sitecoreSKU": {
+      "type": "string",
+      "defaultValue": "xM1",
+      "allowedValues": [
+        "xM1",
+        "xM2",
+        "xM3",
+        "xM4",
+        "xM5"
+      ],
+      "metadata": {
+        "description": "Sitecore SKU controls the sizes and service levels of the provisioned resources"
+      }
+    },
+    "skuMap": {
+      "type": "secureObject",
+      "defaultValue": {
+        "xM1": {
+          "CmHostingPlan": {
+            "SkuName": "[parameters('cm.hostingplan.skuname')]",
+            "SkuCapacity": "[parameters('cm.hostingplan.skucapacity')]"
+          },
+          "CdHostingPlan": {
+            "SkuName": "[parameters('cd.hostingplan.skuname')]",
+            "SkuCapacity": "[parameters('cd.hostingplan.skucapacity')]"
+          },
+          "CoreSqlDatabase": {
+            "Edition": "[parameters('sqldatabase.edition')]",
+            "MaxSize": "[parameters('sqldatabase.maxsize')]",
+            "ServiceObjectiveLevel": "[parameters('sqldatabase.serviceobjectivelevel')]"
+          },
+          "MasterSqlDatabase": {
+            "Edition": "[parameters('sqldatabase.edition')]",
+            "MaxSize": "[parameters('sqldatabase.maxsize')]",
+            "ServiceObjectiveLevel": "[parameters('sqldatabase.serviceobjectivelevel')]"
+          },
+          "WebSqlDatabase": {
+            "Edition": "[parameters('sqldatabase.edition')]",
+            "MaxSize": "[parameters('sqldatabase.maxsize')]",
+            "ServiceObjectiveLevel": "[parameters('sqldatabase.serviceobjectivelevel')]"
+          },
+          "Searchservice": {
+            "SkuName": "[parameters('searchservice.skuname')]",
+            "Partitions": "[parameters('searchservice.partitioncount')]",
+            "Replicas": "[parameters('searchservice.replicacount')]"
+          },
+          "RedisCache": {
+            "SkuName": "[parameters('rediscache.skuname')]",
+            "SkuFamily": "[parameters('rediscache.skufamily')]",
+            "SkuCapacity": "[int(parameters('rediscache.skucapacity'))]"
+          }
+        },
+        "xM2": {
+          "CmHostingPlan": {
+            "SkuName": "B2",
+            "SkuCapacity": 1
+          },
+          "CdHostingPlan": {
+            "SkuName": "B2",
+            "SkuCapacity": 2
+          },
+          "CoreSqlDatabase": {
+            "Edition": "Standard",
+            "MaxSize": "268435456000",
+            "ServiceObjectiveLevel": "S1"
+          },
+          "MasterSqlDatabase": {
+            "Edition": "Standard",
+            "MaxSize": "268435456000",
+            "ServiceObjectiveLevel": "S1"
+          },
+          "WebSqlDatabase": {
+            "Edition": "Standard",
+            "MaxSize": "268435456000",
+            "ServiceObjectiveLevel": "S1"
+          },
+          "Searchservice": {
+            "SkuName": "Standard",
+            "Partitions": 1,
+            "Replicas": 1
+          },
+          "RedisCache": {
+            "SkuName": "Standard",
+            "SkuFamily": "C",
+            "SkuCapacity": 1
+          }
+        },
+        "xM3": {
+          "CmHostingPlan": {
+            "SkuName": "B2",
+            "SkuCapacity": 1
+          },
+          "CdHostingPlan": {
+            "SkuName": "B2",
+            "SkuCapacity": 3
+          },
+          "CoreSqlDatabase": {
+            "Edition": "Standard",
+            "MaxSize": "268435456000",
+            "ServiceObjectiveLevel": "S1"
+          },
+          "MasterSqlDatabase": {
+            "Edition": "Standard",
+            "MaxSize": "268435456000",
+            "ServiceObjectiveLevel": "S1"
+          },
+          "WebSqlDatabase": {
+            "Edition": "Standard",
+            "MaxSize": "268435456000",
+            "ServiceObjectiveLevel": "S1"
+          },
+          "Searchservice": {
+            "SkuName": "Standard",
+            "Partitions": 1,
+            "Replicas": 1
+          },
+          "RedisCache": {
+            "SkuName": "Standard",
+            "SkuFamily": "C",
+            "SkuCapacity": 1
+          }
+        },
+        "xM4": {
+          "CmHostingPlan": {
+            "SkuName": "B2",
+            "SkuCapacity": 1
+          },
+          "CdHostingPlan": {
+            "SkuName": "S3",
+            "SkuCapacity": 4
+          },
+          "CoreSqlDatabase": {
+            "Edition": "Standard",
+            "MaxSize": "268435456000",
+            "ServiceObjectiveLevel": "S1"
+          },
+          "MasterSqlDatabase": {
+            "Edition": "Standard",
+            "MaxSize": "268435456000",
+            "ServiceObjectiveLevel": "S1"
+          },
+          "WebSqlDatabase": {
+            "Edition": "Standard",
+            "MaxSize": "268435456000",
+            "ServiceObjectiveLevel": "S2"
+          },
+          "Searchservice": {
+            "SkuName": "Standard",
+            "Partitions": 1,
+            "Replicas": 1
+          },
+          "RedisCache": {
+            "SkuName": "Standard",
+            "SkuFamily": "C",
+            "SkuCapacity": 1
+          }
+        },
+        "xM5": {
+          "CmHostingPlan": {
+            "SkuName": "B2",
+            "SkuCapacity": 1
+          },
+          "CdHostingPlan": {
+            "SkuName": "S3",
+            "SkuCapacity": 8
+          },
+          "CoreSqlDatabase": {
+            "Edition": "Standard",
+            "MaxSize": "268435456000",
+            "ServiceObjectiveLevel": "S1"
+          },
+          "MasterSqlDatabase": {
+            "Edition": "Standard",
+            "MaxSize": "268435456000",
+            "ServiceObjectiveLevel": "S1"
+          },
+          "WebSqlDatabase": {
+            "Edition": "Standard",
+            "MaxSize": "268435456000",
+            "ServiceObjectiveLevel": "S3"
+          },
+          "Searchservice": {
+            "SkuName": "Standard",
+            "Partitions": 1,
+            "Replicas": 1
+          },
+          "RedisCache": {
+            "SkuName": "Standard",
+            "SkuFamily": "C",
+            "SkuCapacity": 1
+          }
+        }
+      }
+    }
   },
   "resources": [
     {
@@ -802,225 +810,226 @@
         },
         "parameters": {
 
-
           "deploymentId": {
             "value": "[parameters('deploymentId')]"
           },
           "location": {
             "value": "[parameters('location')]"
           },
-		
+          "deployVNet": {
+            "value": "[parameters('deployVNet')]"
+          },
           "cm.ase.location": {
-			"value" : "[parameters('cm.ase.location')]"
-		},
-		"cd.ase.location": {
-			"value" : "[parameters('cd.ase.location')]"
-		},
-		"cm.hostingplan.name": {
-			"value" : "[parameters('cm.hostingplan.name')]"
-		},
-		"cd.hostingplan.name": {
-			"value" : "[parameters('cd.hostingplan.name')]"
-		},
-		"cm.webapp.name": {
-			"value" : "[parameters('cm.webapp.name')]"
-		},
-		"cd.webapp.name": {
-			"value" : "[parameters('cd.webapp.name')]"
-		},
-		"cdn.name": {
-			"value" : "[parameters('cdn.name')]"
-		},
-		"cdn.endpointname": {
-			"value" : "[parameters('cdn.endpointname')]"
-		},
-		"cdn.endpointoriginname": {
-			"value" : "[parameters('cdn.endpointoriginname')]"
-		},
-		"sqlserver.name": {
-			"value" : "[parameters('sqlserver.name')]"
-		},
-		"sqlserver.login": {
-			"value" : "[parameters('sqlserver.login')]"
-		},
-		"sqlserver.password": {
-			"value" : "[parameters('sqlserver.password')]"
-		},
-		"web.sqlserver.name": {
-			"value" : "[parameters('web.sqlserver.name')]"
-		},
-		"web.sqlserver.login": {
-			"value" : "[parameters('web.sqlserver.login')]"
-		},
-		"web.sqlserver.password": {
-			"value" : "[parameters('web.sqlserver.password')]"
-		},
-		"core.sqldatabase.name": {
-			"value" : "[parameters('core.sqldatabase.name')]"
-		},
-		"master.sqldatabase.name": {
-			"value" : "[parameters('master.sqldatabase.name')]"
-		},
-		"web.sqldatabase.name": {
-			"value" : "[parameters('web.sqldatabase.name')]"
-		},
-		"searchservice.name": {
-			"value" : "[parameters('searchservice.name')]"
-		},
-		"rediscache.name": {
-			"value" : "[parameters('rediscache.name')]"
-		},
-		"applicationinsights.name": {
-			"value" : "[parameters('applicationinsights.name')]"
-		},
-		"applicationinsights.location": {
-			"value" : "[parameters('applicationinsights.location')]"
-		},
-		"cm.hostingplan.skuname": {
-			"value" : "[parameters('cm.hostingplan.skuname')]"
-		},
-		"cm.hostingplan.skucapacity": {
-			"value" : "[parameters('cm.hostingplan.skucapacity')]"
-		},
-		"cd.hostingplan.skuname": {
-			"value" : "[parameters('cd.hostingplan.skuname')]"
-		},
-		"cd.hostingplan.skucapacity": {
-			"value" : "[parameters('cd.hostingplan.skucapacity')]"
-		},
-		"searchservice.skuname": {
-			"value" : "[parameters('searchservice.skuname')]"
-		},
-		"sqlserver.version": {
-			"value" : "[parameters('sqlserver.version')]"
-		},
-		"sqldatabase.collation": {
-			"value" : "[parameters('sqldatabase.collation')]"
-		},
-		"sqldatabase.edition": {
-			"value" : "[parameters('sqldatabase.edition')]"
-		},
-		"sqldatabase.maxsize": {
-			"value" : "[parameters('sqldatabase.maxsize')]"
-		},
-		"sqldatabase.serviceobjectivelevel": {
-			"value" : "[parameters('sqldatabase.serviceobjectivelevel')]"
-		},
-		"searchservice.replicacount": {
-			"value" : "[parameters('searchservice.replicacount')]"
-		},
-		"searchservice.partitioncount": {
-			"value" : "[parameters('searchservice.partitioncount')]"
-		},
-		"rediscache.skuname": {
-			"value" : "[parameters('rediscache.skuname')]"
-		},
-		"rediscache.skufamily": {
-			"value" : "[parameters('rediscache.skufamily')]"
-		},
-		"rediscache.skucapacity": {
-			"value" : "[parameters('rediscache.skucapacity')]"
-		},
-		"sitecoreTags": {
-			"value": "[parameters('sitecoreTags')]"
-		},
-		"trafficManagerName": {
-			"value" : "[parameters('trafficManagerName')]"
-		},
-		"trafficManagerHostName": {
-			"value" : "[parameters('trafficManagerHostName')]"
-		},
-		"trafficManagerRelativeName": {
-			"value" : "[parameters('trafficManagerRelativeName')]"
-		},
-		"trafficRoutingMethod": {
-			"value" : "[parameters('trafficRoutingMethod')]"
-		},
-		"cmipSslAddressCount": {
-			"value" : "[parameters('cmipSslAddressCount')]"
-		},
-		"cdipSslAddressCount": {
-			"value" : "[parameters('cdipSslAddressCount')]"
-		},
-		"cmworker1Size": {
-			"value" : "[parameters('cmworker1Size')]"
-		},
-		"cdworker1Size": {
-			"value" : "[parameters('cdworker1Size')]"
-		},
-		"cmworker1count": {
-			"value" : "[parameters('cmworker1count')]"
-		},
-		"cdworker1count": {
-			"value" : "[parameters('cdworker1count')]"
-		},
-		"cmworker2Size": {
-			"value" : "[parameters('cmworker2Size')]"
-		},
-		"cdworker2Size": {
-			"value" : "[parameters('cdworker2Size')]"
-		},
-		"cmworker2count": {
-			"value" : "[parameters('cmworker2count')]"
-		},
-		"cdworker2count": {
-			"value" : "[parameters('cdworker2count')]"
-		},
-		"cmfrontendSize": {
-			"value" : "[parameters('cmfrontendSize')]"
-		},
-		"cdfrontendSize": {
-			"value" : "[parameters('cdfrontendSize')]"
-		},
-		"cmfrontendCount": {
-			"value" : "[parameters('cmfrontendCount')]"
-		},
-		"cdfrontendCount": {
-			"value" : "[parameters('cdfrontendCount')]"
-		},
-		"cmworker3Size": {
-			"value" : "[parameters('cmworker3Size')]"
-		},
-		"cdworker3Size": {
-			"value" : "[parameters('cdworker3Size')]"
-	 	},
-		"cmworker3count": {
-			"value" : "[parameters('cmworker3count')]"
-		},
-		"cdworker3count": {
-			"value" : "[parameters('cdworker3count')]"
-		},
-		"cmvnetName": {
-			"value" : "[parameters('cmvnetName')]"
-		},
-		"cdvnetName": {
-			"value" : "[parameters('cdvnetName')]"
-		},
-		"cmvnetResourceGroupName": {
-			"value" : "[parameters('cmvnetResourceGroupName')]"
-		},
-		"cdvnetResourceGroupName": {
-			"value" : "[parameters('cdvnetResourceGroupName')]"
-		},
-		"cmsubnetName": {
-			"value" : "[parameters('cmsubnetName')]"
-		},
-		"cdsubnetName": {
-			"value" : "[parameters('cdsubnetName')]"
-		},
-		"serverFarmWorkerSize": {
-			"value" : "[parameters('serverFarmWorkerSize')]"
-		},
-		"cmappServiceEnvironmentName": {
-			"value" : "[parameters('cmappServiceEnvironmentName')]"
-		},
-		"cdappServiceEnvironmentName": {
-			"value": "[parameters('cdappServiceEnvironmentName')]"
-		},
-		"sitecoreSKU": {
-			"value": "[parameters('sitecoreSKU')]"
-		}
-	    }
+            "value": "[parameters('cm.ase.location')]"
+          },
+          "cd.ase.location": {
+            "value": "[parameters('cd.ase.location')]"
+          },
+          "cm.hostingplan.name": {
+            "value": "[parameters('cm.hostingplan.name')]"
+          },
+          "cd.hostingplan.name": {
+            "value": "[parameters('cd.hostingplan.name')]"
+          },
+          "cm.webapp.name": {
+            "value": "[parameters('cm.webapp.name')]"
+          },
+          "cd.webapp.name": {
+            "value": "[parameters('cd.webapp.name')]"
+          },
+          "cdn.name": {
+            "value": "[parameters('cdn.name')]"
+          },
+          "cdn.endpointname": {
+            "value": "[parameters('cdn.endpointname')]"
+          },
+          "cdn.endpointoriginname": {
+            "value": "[parameters('cdn.endpointoriginname')]"
+          },
+          "sqlserver.name": {
+            "value": "[parameters('sqlserver.name')]"
+          },
+          "sqlserver.login": {
+            "value": "[parameters('sqlserver.login')]"
+          },
+          "sqlserver.password": {
+            "value": "[parameters('sqlserver.password')]"
+          },
+          "web.sqlserver.name": {
+            "value": "[parameters('web.sqlserver.name')]"
+          },
+          "web.sqlserver.login": {
+            "value": "[parameters('web.sqlserver.login')]"
+          },
+          "web.sqlserver.password": {
+            "value": "[parameters('web.sqlserver.password')]"
+          },
+          "core.sqldatabase.name": {
+            "value": "[parameters('core.sqldatabase.name')]"
+          },
+          "master.sqldatabase.name": {
+            "value": "[parameters('master.sqldatabase.name')]"
+          },
+          "web.sqldatabase.name": {
+            "value": "[parameters('web.sqldatabase.name')]"
+          },
+          "searchservice.name": {
+            "value": "[parameters('searchservice.name')]"
+          },
+          "rediscache.name": {
+            "value": "[parameters('rediscache.name')]"
+          },
+          "applicationinsights.name": {
+            "value": "[parameters('applicationinsights.name')]"
+          },
+          "applicationinsights.location": {
+            "value": "[parameters('applicationinsights.location')]"
+          },
+          "cm.hostingplan.skuname": {
+            "value": "[parameters('cm.hostingplan.skuname')]"
+          },
+          "cm.hostingplan.skucapacity": {
+            "value": "[parameters('cm.hostingplan.skucapacity')]"
+          },
+          "cd.hostingplan.skuname": {
+            "value": "[parameters('cd.hostingplan.skuname')]"
+          },
+          "cd.hostingplan.skucapacity": {
+            "value": "[parameters('cd.hostingplan.skucapacity')]"
+          },
+          "searchservice.skuname": {
+            "value": "[parameters('searchservice.skuname')]"
+          },
+          "sqlserver.version": {
+            "value": "[parameters('sqlserver.version')]"
+          },
+          "sqldatabase.collation": {
+            "value": "[parameters('sqldatabase.collation')]"
+          },
+          "sqldatabase.edition": {
+            "value": "[parameters('sqldatabase.edition')]"
+          },
+          "sqldatabase.maxsize": {
+            "value": "[parameters('sqldatabase.maxsize')]"
+          },
+          "sqldatabase.serviceobjectivelevel": {
+            "value": "[parameters('sqldatabase.serviceobjectivelevel')]"
+          },
+          "searchservice.replicacount": {
+            "value": "[parameters('searchservice.replicacount')]"
+          },
+          "searchservice.partitioncount": {
+            "value": "[parameters('searchservice.partitioncount')]"
+          },
+          "rediscache.skuname": {
+            "value": "[parameters('rediscache.skuname')]"
+          },
+          "rediscache.skufamily": {
+            "value": "[parameters('rediscache.skufamily')]"
+          },
+          "rediscache.skucapacity": {
+            "value": "[parameters('rediscache.skucapacity')]"
+          },
+          "sitecoreTags": {
+            "value": "[parameters('sitecoreTags')]"
+          },
+          "trafficManagerName": {
+            "value": "[parameters('trafficManagerName')]"
+          },
+          "trafficManagerHostName": {
+            "value": "[parameters('trafficManagerHostName')]"
+          },
+          "trafficManagerRelativeName": {
+            "value": "[parameters('trafficManagerRelativeName')]"
+          },
+          "trafficRoutingMethod": {
+            "value": "[parameters('trafficRoutingMethod')]"
+          },
+          "cmipSslAddressCount": {
+            "value": "[parameters('cmipSslAddressCount')]"
+          },
+          "cdipSslAddressCount": {
+            "value": "[parameters('cdipSslAddressCount')]"
+          },
+          "cmworker1Size": {
+            "value": "[parameters('cmworker1Size')]"
+          },
+          "cdworker1Size": {
+            "value": "[parameters('cdworker1Size')]"
+          },
+          "cmworker1count": {
+            "value": "[parameters('cmworker1count')]"
+          },
+          "cdworker1count": {
+            "value": "[parameters('cdworker1count')]"
+          },
+          "cmworker2Size": {
+            "value": "[parameters('cmworker2Size')]"
+          },
+          "cdworker2Size": {
+            "value": "[parameters('cdworker2Size')]"
+          },
+          "cmworker2count": {
+            "value": "[parameters('cmworker2count')]"
+          },
+          "cdworker2count": {
+            "value": "[parameters('cdworker2count')]"
+          },
+          "cmfrontendSize": {
+            "value": "[parameters('cmfrontendSize')]"
+          },
+          "cdfrontendSize": {
+            "value": "[parameters('cdfrontendSize')]"
+          },
+          "cmfrontendCount": {
+            "value": "[parameters('cmfrontendCount')]"
+          },
+          "cdfrontendCount": {
+            "value": "[parameters('cdfrontendCount')]"
+          },
+          "cmworker3Size": {
+            "value": "[parameters('cmworker3Size')]"
+          },
+          "cdworker3Size": {
+            "value": "[parameters('cdworker3Size')]"
+          },
+          "cmworker3count": {
+            "value": "[parameters('cmworker3count')]"
+          },
+          "cdworker3count": {
+            "value": "[parameters('cdworker3count')]"
+          },
+          "cmvnetName": {
+            "value": "[parameters('cmvnetName')]"
+          },
+          "cdvnetName": {
+            "value": "[parameters('cdvnetName')]"
+          },
+          "cmvnetResourceGroupName": {
+            "value": "[parameters('cmvnetResourceGroupName')]"
+          },
+          "cdvnetResourceGroupName": {
+            "value": "[parameters('cdvnetResourceGroupName')]"
+          },
+          "cmsubnetName": {
+            "value": "[parameters('cmsubnetName')]"
+          },
+          "cdsubnetName": {
+            "value": "[parameters('cdsubnetName')]"
+          },
+          "serverFarmWorkerSize": {
+            "value": "[parameters('serverFarmWorkerSize')]"
+          },
+          "cmappServiceEnvironmentName": {
+            "value": "[parameters('cmappServiceEnvironmentName')]"
+          },
+          "cdappServiceEnvironmentName": {
+            "value": "[parameters('cdappServiceEnvironmentName')]"
+          },
+          "sitecoreSKU": {
+            "value": "[parameters('sitecoreSKU')]"
+          }
+        }
       }
     },
     {
@@ -1040,101 +1049,101 @@
             "value": "[parameters('location')]"
           },
           "cd.ase.location": {
-	  "value": "[parameters('cd.ase.location')]"
-	},
-    "sitecore.admin.password": {
-      "value": "[parameters('sitecore.admin.password')]"
-    },
-    "passwordSalt": {
-      "value": "[parameters('passwordSalt')]"
-    },
-    "sqlserver.login": {
-      "value": "[parameters('sqlserver.login')]"
-    },
-    "sqlserver.password": {
-      "value": "[parameters('sqlserver.password')]"
-    },
-    "web.sqlserver.login": {
-      "value": "[parameters('web.sqlserver.login')]"
-    },
-    "web.sqlserver.password": {
-      "value": "[parameters('web.sqlserver.password')]"
-    },
-
-    "coreSqlDatabaseName": {
-      "value": "[parameters('coreSqlDatabaseName')]"
-    },
-    "masterSqlDatabaseName": {
-      "value": "[parameters('masterSqlDatabaseName')]"
-    },
-    "webSqlDatabaseName": {
-      "value": "[parameters('webSqlDatabaseName')]"
-    },
-
-    "searchServiceName": {     
-      "value": "[parameters('searchservice.name')]"
-    },
-
-    "redisCacheName": {
-       "value": "[parameters('redisCacheName')]"
-    },
-
-    "applicationInsightsName": {
-      "value": "[parameters('applicationInsightsName')]"
-    },
-
-    "cmWebAppName": {
-      "value": "[parameters('cmWebAppName')]"
-    },
-    "cm.msdeploy.packageurl": {
-      "value": "[parameters('cm.msdeploy.packageurl')]"
-    },
-    "cm.core.sqldatabase.username": {
-      "value": "[parameters('cm.core.sqldatabase.username')]"
-    },
-    "cm.core.sqldatabase.password": {
-      "value": "[parameters('cm.core.sqldatabase.password')]"
-    },
-    "cm.master.sqldatabase.username": {
-      "value": "[parameters('cm.master.sqldatabase.username')]"
-    },
-    "cm.master.sqldatabase.password": {
-      "value": "[parameters('cm.master.sqldatabase.password')]"
+            "value": "[parameters('cd.ase.location')]"
           },
-    "cm.web.sqldatabase.username": {
-      "value": "[parameters('cd.web.sqldatabase.username')]"
-    },
-    "cm.web.sqldatabase.password": {
-      "value": "[parameters('cd.web.sqldatabase.password')]"
+          "sitecore.admin.password": {
+            "value": "[parameters('sitecore.admin.password')]"
+          },
+          "passwordSalt": {
+            "value": "[parameters('passwordSalt')]"
+          },
+          "sqlserver.login": {
+            "value": "[parameters('sqlserver.login')]"
+          },
+          "sqlserver.password": {
+            "value": "[parameters('sqlserver.password')]"
+          },
+          "web.sqlserver.login": {
+            "value": "[parameters('web.sqlserver.login')]"
+          },
+          "web.sqlserver.password": {
+            "value": "[parameters('web.sqlserver.password')]"
           },
 
-    "cdWebAppName": {
-      "value": "[parameters('cdWebAppName')]"
-    },
-    "cd.msdeploy.packageurl": {
-      "value": "[parameters('cd.msdeploy.packageurl')]"
-    },
-    "cd.core.sqldatabase.username": {
-      "value": "[parameters('cd.core.sqldatabase.username')]"
-    },
-    "cd.core.sqldatabase.password": {
-      "value": "[parameters('cd.core.sqldatabase.password')]"
+          "coreSqlDatabaseName": {
+            "value": "[parameters('coreSqlDatabaseName')]"
           },
-    "cd.web.sqldatabase.username": {
-      "value": "[parameters('cd.web.sqldatabase.username')]"
-    },
-    "cd.web.sqldatabase.password": {
-      "value": "[parameters('cd.web.sqldatabase.password')]"
+          "masterSqlDatabaseName": {
+            "value": "[parameters('masterSqlDatabaseName')]"
+          },
+          "webSqlDatabaseName": {
+            "value": "[parameters('webSqlDatabaseName')]"
           },
 
-    "security.clientIp": {
-         "value": "[parameters('security.clientIp')]"
-    },
-    "security.clientIpMask": {
-      "value": "[parameters('security.clientIpMask')]"
-    },
+          "searchServiceName": {
+            "value": "[parameters('searchservice.name')]"
+          },
 
-     
+          "redisCacheName": {
+            "value": "[parameters('redisCacheName')]"
+          },
+
+          "applicationInsightsName": {
+            "value": "[parameters('applicationInsightsName')]"
+          },
+
+          "cmWebAppName": {
+            "value": "[parameters('cmWebAppName')]"
+          },
+          "cm.msdeploy.packageurl": {
+            "value": "[parameters('cm.msdeploy.packageurl')]"
+          },
+          "cm.core.sqldatabase.username": {
+            "value": "[parameters('cm.core.sqldatabase.username')]"
+          },
+          "cm.core.sqldatabase.password": {
+            "value": "[parameters('cm.core.sqldatabase.password')]"
+          },
+          "cm.master.sqldatabase.username": {
+            "value": "[parameters('cm.master.sqldatabase.username')]"
+          },
+          "cm.master.sqldatabase.password": {
+            "value": "[parameters('cm.master.sqldatabase.password')]"
+          },
+          "cm.web.sqldatabase.username": {
+            "value": "[parameters('cd.web.sqldatabase.username')]"
+          },
+          "cm.web.sqldatabase.password": {
+            "value": "[parameters('cd.web.sqldatabase.password')]"
+          },
+
+          "cdWebAppName": {
+            "value": "[parameters('cdWebAppName')]"
+          },
+          "cd.msdeploy.packageurl": {
+            "value": "[parameters('cd.msdeploy.packageurl')]"
+          },
+          "cd.core.sqldatabase.username": {
+            "value": "[parameters('cd.core.sqldatabase.username')]"
+          },
+          "cd.core.sqldatabase.password": {
+            "value": "[parameters('cd.core.sqldatabase.password')]"
+          },
+          "cd.web.sqldatabase.username": {
+            "value": "[parameters('cd.web.sqldatabase.username')]"
+          },
+          "cd.web.sqldatabase.password": {
+            "value": "[parameters('cd.web.sqldatabase.password')]"
+          },
+
+          "security.clientIp": {
+            "value": "[parameters('security.clientIp')]"
+          },
+          "security.clientIpMask": {
+            "value": "[parameters('security.clientIpMask')]"
+          },
+
+
           "infrastructure": {
             "value": "[reference(concat(deployment().name, '-infrastructure')).outputs.infrastructure.value]"
           }
@@ -1144,6 +1153,6 @@
         "[resourceId('Microsoft.Resources/deployments', concat(deployment().name, '-infrastructure'))]"
       ]
     }
-    
+
   ]
 }
