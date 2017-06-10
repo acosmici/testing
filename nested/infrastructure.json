@@ -712,8 +712,7 @@
       "type": "Microsoft.Web/hostingEnvironments",
       "location": "[parameters('cm.ase.Location')]",
       "dependsOn": [
-        "resourceId('Microsoft.Network/virtualNetworks/'",
-        "parameters('cmVNETName'))"
+        "resourceId('Microsoft.Network/virtualNetworks/'",   "parameters('cmvnetName'))"
       ],
       "properties": {
         "name": "[parameters('cmappServiceEnvironmentName')]",
@@ -739,7 +738,7 @@
         "MultiSize": "[parameters('cmfrontendSize')]",
         "MultiRoleCount": "[parameters('cmfrontendCount')]",
         "virtualNetwork": {
-          "Id": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',parameters('cmVNetResourceGroupName'),'/providers/Microsoft.Network/virtualNetworks/', parameters('cmVNETName'))]",
+          "Id": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',parameters('cmVNetResourceGroupName'),'/providers/Microsoft.Network/virtualNetworks/', parameters('cmvnetName'))]",
           "Subnet": "[parameters('cmSubnetName')]"
         }
       }
@@ -750,8 +749,7 @@
       "type": "Microsoft.Web/hostingEnvironments",
       "location": "[parameters('cd.ase.Location')]",
       "dependsOn": [
-        "resourceId('Microsoft.Network/virtualNetworks/'",
-        "parameters('cdVNETName'))"
+        "resourceId('Microsoft.Network/virtualNetworks/'",  "parameters('cdvnetName'))"
       ],
       "properties": {
         "name": "[parameters('cdappServiceEnvironmentName')]",
@@ -777,7 +775,7 @@
         "MultiSize": "[parameters('cdfrontendSize')]",
         "MultiRoleCount": "[parameters('cdfrontendCount')]",
         "virtualNetwork": {
-          "Id": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',parameters('cdVNetResourceGroupName'),'/providers/Microsoft.Network/virtualNetworks/', parameters('cdVNETName'))]",
+          "Id": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',parameters('cdVNetResourceGroupName'),'/providers/Microsoft.Network/virtualNetworks/', parameters('cdvnetName'))]",
           "Subnet": "[parameters('cdSubnetName')]"
         }
       }
