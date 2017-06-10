@@ -712,7 +712,8 @@
       "type": "Microsoft.Web/hostingEnvironments",
       "location": "[parameters('cm.ase.Location')]",
       "dependsOn": [
-        "resourceId('Microsoft.Network/virtualNetworks/'", "parameters('cmVNETName'))"
+        "resourceId('Microsoft.Network/virtualNetworks/'",
+        "parameters('cmVNETName'))"
       ],
       "properties": {
         "name": "[parameters('cmappServiceEnvironmentName')]",
@@ -749,7 +750,8 @@
       "type": "Microsoft.Web/hostingEnvironments",
       "location": "[parameters('cd.ase.Location')]",
       "dependsOn": [
-        "resourceId('Microsoft.Network/virtualNetworks/'", "parameters('cdVNETName'))"
+        "resourceId('Microsoft.Network/virtualNetworks/'",
+        "parameters('cdVNETName'))"
       ],
       "properties": {
         "name": "[parameters('cdappServiceEnvironmentName')]",
@@ -892,7 +894,107 @@
           }
         }
       ]
+    },
+    {
+      "name": "[variables('profileName')]",
+      "type": "Microsoft.Cdn/profiles",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2016-04-02",
+      "sku": {
+        "name": "Standard_Akamai"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/trafficmanagerprofiles', parameters('trafficManagerName'))]"
+      ],
+      "tags": {
+        "displayName": "[variables('profileName')]"
+      },
+      "resources": [
+        {
+          "name": "[variables('endpointName')]",
+          "type": "endpoints",
+          "location": "[parameters('location')]",
+          "apiVersion": "2016-04-02",
+          "dependsOn": [
+            "[variables('profileName')]",
+            "[parameters('trafficManagerName')]"
+          ],
+          "tags": {
+            "displayName": "[variables('endpointName')]"
+          },
+          "properties": {
+            "originHostHeader": "[variables('trafficManagerHostName')]",
+            "isHttpAllowed": true,
+            "isHttpsAllowed": true,
+            "queryStringCachingBehavior": "IgnoreQueryString",
+            "contentTypesToCompress": [
+              "text/plain",
+              "text/html",
+              "text/css",
+              "application/x-javascript",
+              "text/javascript"
+            ],
+            "isCompressionEnabled": true,
+            "origins": [
+              {
+                "name": "[variables('originName')]",
+                "properties": {
+                  "hostName": "[variables('trafficManagerHostName')]"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "Microsoft.Cache/Redis",
+      "name": "[variables('redisCacheNameTidy')]",
+      "apiVersion": "[variables('redisApiVersion')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "sku": {
+          "name": "[parameters('resourceSizes').RedisCache.SkuName]",
+          "family": "[parameters('resourceSizes').RedisCache.SkuFamily]",
+          "capacity": "[parameters('resourceSizes').RedisCache.SkuCapacity]"
+        },
+        "enableNonSslPort": false
+      },
+      "dependsOn": [],
+      "tags": {
+        "provider": "[parameters('sitecoreTags').provider]"
+      }
+    },
+    {
+      "type": "Microsoft.Insights/Components",
+      "name": "[variables('appInsightsNameTidy')]",
+      "apiVersion": "[variables('appInsightsApiVersion')]",
+      "location": "[parameters('applicationinsights.location')]",
+      "properties": {
+        "ApplicationId": "[variables('appInsightsNameTidy')]",
+        "Application_Type": "web"
+      },
+      "tags": {
+        "provider": "[parameters('sitecoreTags').provider]"
+      }
+    },
+    {
+      "type": "Microsoft.Search/searchServices",
+      "apiVersion": "[variables('searchApiVersion')]",
+      "name": "[variables('searchServiceNameTidy')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "sku": {
+          "name": "[toLower(parameters('resourceSizes').SearchService.SkuName)]"
+        },
+        "replicaCount": "[parameters('resourceSizes').SearchService.Replicas]",
+        "partitionCount": "[parameters('resourceSizes').SearchService.Partitions]"
+      },
+      "tags": {
+        "provider": "[parameters('sitecoreTags').provider]"
+      }
     }
+
 
 
 
