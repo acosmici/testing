@@ -821,8 +821,7 @@
 			"dependsOn": [
 				"[resourceId('Microsoft.Web/hostingEnvironments/', parameters('cmappServiceEnvironmentName'))]",
 				"[resourceId('Microsoft.Web/hostingEnvironments/', parameters('cdappServiceEnvironmentName'))]",
-				"[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]",
-				"[concat('Microsoft.Web/sites/', variables('cmWebAppNameTidy'), '/Extensions/MSDeploy')]"
+				"[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]"
 			],
 			"tags": {
 				"provider": "[parameters('sitecoreTags').provider]"
