@@ -891,58 +891,7 @@
         }
       ]
     },
-    {
-      "name": "[variables('profileName')]",
-      "type": "Microsoft.Cdn/profiles",
-      "location": "[resourceGroup().location]",
-      "apiVersion": "2016-04-02",
-      "sku": {
-        "name": "Standard_Akamai"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/trafficmanagerprofiles', parameters('trafficManagerName'))]"
-      ],
-      "tags": {
-        "displayName": "[variables('profileName')]"
-      },
-      "resources": [
-        {
-          "name": "[variables('endpointName')]",
-          "type": "endpoints",
-          "location": "[parameters('location')]",
-          "apiVersion": "2016-04-02",
-          "dependsOn": [
-            "[variables('profileName')]",
-            "[parameters('trafficManagerName')]"
-          ],
-          "tags": {
-            "displayName": "[variables('endpointName')]"
-          },
-          "properties": {
-            "originHostHeader": "[variables('trafficManagerHostName')]",
-            "isHttpAllowed": true,
-            "isHttpsAllowed": true,
-            "queryStringCachingBehavior": "IgnoreQueryString",
-            "contentTypesToCompress": [
-              "text/plain",
-              "text/html",
-              "text/css",
-              "application/x-javascript",
-              "text/javascript"
-            ],
-            "isCompressionEnabled": true,
-            "origins": [
-              {
-                "name": "[variables('originName')]",
-                "properties": {
-                  "hostName": "[variables('trafficManagerHostName')]"
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
+    
     {
       "type": "Microsoft.Cache/Redis",
       "name": "[variables('redisCacheNameTidy')]",
