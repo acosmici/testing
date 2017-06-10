@@ -595,14 +595,14 @@
 
     "cmsubnetName": {
       "type": "string",
-      "defaultValue": "cmsubnetName",
+      "defaultValue": "cmsubnetNameV2",
       "metadata": {
         "description": "The name of the Subnet onto which to deploy the CM environment"
       }
     },
     "cdsubnetName": {
       "type": "string",
-      "defaultValue": "cdsubnetName",
+      "defaultValue": "cdsubnetNameV2",
       "metadata": {
         "description": "The name of the Subnet onto which to deploy the CD environment"
       }
