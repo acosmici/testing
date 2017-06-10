@@ -377,6 +377,37 @@
         "description": "The name of the VNET onto which to deploy the CM environment"
       }
     },
+    "cmVNetAddressSpace": {
+      "type": "string",
+      "defaultValue": "10.8.0.0/16",
+      "metadata": {
+        "description": "The VNet address space for the CM VNet"
+      }
+    },
+    "cmSubnetAddress": {
+      "type": "string",
+      "defaultValue": "10.8.1.0/24",
+      "metadata": {
+        "description": "The Subnet address space for the CM VNet"
+      }
+    },
+
+    "cdVNetAddressSpace": {
+      "type": "string",
+      "defaultValue": "10.10.0.0/16",
+      "metadata": {
+        "description": "The VNet address space for the CD VNet"
+      }
+    },
+    "cdSubnetAddress": {
+      "type": "string",
+      "defaultValue": "10.10.1.0/24",
+      "metadata": {
+        "description": "The Subnet address space for the CD VNet"
+      }
+    },
+
+
     "cdvnetName": {
       "type": "string",
       "defaultValue": "cdvnetName",
@@ -646,6 +677,8 @@
     "searchApiVersion": "2015-08-19",
     "redisApiVersion": "2016-04-01",
     "appInsightsApiVersion": "2015-05-01",
+    "aseApiVersion": "2015-08-01",
+    "vnetApiVersion": "2015-06-15",
     "cmHostingPlanNameTidy": "[toLower(trim(parameters('cm.hostingplan.name')))]",
     "cdHostingPlanNameTidy": "[toLower(trim(parameters('cd.hostingplan.name')))]",
     "cmWebAppNameTidy": "[toLower(trim(parameters('cm.webapp.name')))]",
@@ -669,7 +702,7 @@
       "name": "[parameters('cmvnetName')]",
       "type": "Microsoft.Network/virtualNetworks",
       "location": "[parameters('cm.ase.Location')]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "[variables('vnetApiVersion')]",
       "dependsOn": [],
       "tags": {
         "displayName": "ASE-VNET"
@@ -677,14 +710,14 @@
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
-            "10.8.0.0/16"
+            "[parameters('cmVNetAddressSpace')]"
           ]
         },
         "subnets": [
           {
             "name": "[parameters('cmsubnetName')]",
             "properties": {
-              "addressPrefix": "10.8.1.0/24"
+              "addressPrefix": "[parameters('cmSubnetAddress')]"
             }
           }
         ]
@@ -695,7 +728,7 @@
       "name": "[parameters('cdvnetName')]",
       "type": "Microsoft.Network/virtualNetworks",
       "location": "[parameters('cd.ase.Location')]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "[variables('vnetApiVersion')]",
       "dependsOn": [],
       "tags": {
         "displayName": "ASE-VNET"
@@ -703,21 +736,21 @@
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
-            "10.10.0.0/16"
+            "[parameters('cdVNetAddressSpace')]"
           ]
         },
         "subnets": [
           {
             "name": "[parameters('cdsubnetName')]",
             "properties": {
-              "addressPrefix": "10.10.1.0/24"
+              "addressPrefix": "[parameters('cdSubnetAddress')]"
             }
           }
         ]
       }
     },
     {
-      "apiVersion": "2015-08-01",
+      "apiVersion": "[variables('aseApiVersion')]",
       "name": "[parameters('cmappServiceEnvironmentName')]",
       "type": "Microsoft.Web/hostingEnvironments",
       "location": "[parameters('cm.ase.Location')]",
@@ -753,7 +786,7 @@
       }
     },
     {
-      "apiVersion": "2015-08-01",
+      "apiVersion": "[variables('aseApiVersion')]",
       "name": "[parameters('cdappServiceEnvironmentName')]",
       "type": "Microsoft.Web/hostingEnvironments",
       "location": "[parameters('cd.ase.Location')]",
