@@ -891,7 +891,7 @@
         }
       ]
     },
-    
+
     {
       "type": "Microsoft.Cache/Redis",
       "name": "[variables('redisCacheNameTidy')]",
@@ -922,10 +922,216 @@
       "tags": {
         "provider": "[parameters('sitecoreTags').provider]"
       }
-    }
-    
+    },
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "name": "[variables('cmHostingPlanNameTidy')]",
+      "apiVersion": "[variables('serverFarmApiVersion')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/hostingEnvironments/', parameters('cmappServiceEnvironmentName'))]"
+      ],
+      "kind": "app",
+      "sku": {
+        "name": "[parameters('resourceSizes').CmHostingPlan.SkuName]",
+        "capacity": "[parameters('resourceSizes').CmHostingPlan.SkuCapacity]",
+        "family": "P",
+        "size": "P3",
+        "tier": "Premium"
+      },
+      "properties": {
+        "name": "[variables('cmHostingPlanNameTidy')]",
+        "numberOfWorkers": 1,
+        "workerSize": "[parameters('ServerFarmWorkerSize')]",
+        "hostingEnvironment": "[parameters('cmappServiceEnvironmentName')]",
+        "hostingEnvironmentId": "[resourceId('Microsoft.Web/hostingEnvironments', parameters('cmappServiceEnvironmentName'))]"
+      },
+      "location": "[parameters('cm.ase.Location')]",
+      "tags": {
+        "provider": "[parameters('sitecoreTags').provider]"
+      }
+    },
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "name": "[variables('cdHostingPlanNameTidy')]",
+      "apiVersion": "[variables('serverFarmApiVersion')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/hostingEnvironments/', parameters('cdappServiceEnvironmentName'))]"
+      ],
+      "kind": "app",
+      "sku": {
+        "name": "[parameters('resourceSizes').CdHostingPlan.SkuName]",
+        "capacity": "[parameters('resourceSizes').CdHostingPlan.SkuCapacity]",
+        "family": "P",
+        "size": "P3",
+        "tier": "Premium"
+      },
+      "properties": {
+        "name": "[variables('cdHostingPlanNameTidy')]",
+        "numberOfWorkers": 1,
+        "worker1Size": "[parameters('ServerFarmWorkerSize')]",
+        "hostingEnvironment": "[parameters('cdappServiceEnvironmentName')]",
+        "hostingEnvironmentId": "[resourceId('Microsoft.Web/hostingEnvironments', parameters('cdappServiceEnvironmentName'))]"
+      },
+      "location": "[parameters('cd.ase.location')]",
+      "tags": {
+        "provider": "[parameters('sitecoreTags').provider]"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "name": "[variables('cmWebAppNameTidy')]",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('cmHostingPlanNameTidy'))]",
+        "siteConfig": {
+          "use32BitWorkerProcess": false,
+          "alwaysOn": true,
+          "phpVersion": "",
+          "defaultDocuments": [
+            "index.html"
+          ]
+        }
+      },
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/hostingEnvironments/', parameters('cmappServiceEnvironmentName'))]",
+        "[resourceId('Microsoft.Web/hostingEnvironments/', parameters('cdappServiceEnvironmentName'))]",
+        "[resourceId('Microsoft.Web/serverfarms', variables('cmHostingPlanNameTidy'))]"
+      ],
+      "tags": {
+        "provider": "[parameters('sitecoreTags').provider]"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "name": "[variables('cdWebAppNameTidy')]",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]",
+        "siteConfig": {
+          "use32BitWorkerProcess": false,
+          "alwaysOn": true,
+          "phpVersion": "",
+          "defaultDocuments": [
+            "index.html"
+          ]
+        }
+      },
+      "location": "[parameters('cd.ase.location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/hostingEnvironments/', parameters('cmappServiceEnvironmentName'))]",
+        "[resourceId('Microsoft.Web/hostingEnvironments/', parameters('cdappServiceEnvironmentName'))]",
+        "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]"
+      ],
+      "tags": {
+        "provider": "[parameters('sitecoreTags').provider]"
+      }
+    },
+    {
+      "name": "[variables('profileName')]",
+      "type": "Microsoft.Cdn/profiles",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2016-04-02",
+      "sku": {
+        "name": "Standard_Akamai"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/trafficmanagerprofiles', parameters('trafficManagerName'))]"
+      ],
+      "tags": {
+        "displayName": "[variables('profileName')]"
+      },
+      "resources": [
+        {
+          "name": "[variables('endpointName')]",
+          "type": "endpoints",
+          "location": "[parameters('location')]",
+          "apiVersion": "2016-04-02",
+          "dependsOn": [
+            "[variables('profileName')]",
+            "[parameters('trafficManagerName')]"
+          ],
+          "tags": {
+            "displayName": "[variables('endpointName')]"
+          },
+          "properties": {
+            "originHostHeader": "[variables('trafficManagerHostName')]",
+            "isHttpAllowed": true,
+            "isHttpsAllowed": true,
+            "queryStringCachingBehavior": "IgnoreQueryString",
+            "contentTypesToCompress": [
+              "text/plain",
+              "text/html",
+              "text/css",
+              "application/x-javascript",
+              "text/javascript"
+            ],
+            "isCompressionEnabled": true,
+            "origins": [
+              {
+                "name": "[variables('originName')]",
+                "properties": {
+                  "hostName": "[variables('trafficManagerHostName')]"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
 
-    
+    {
+      "apiVersion": "2017-03-01",
+      "type": "Microsoft.Network/trafficmanagerprofiles",
+      "name": "[parameters('trafficManagerName')]",
+      "location": "global",
+      "properties": {
+        "trafficRoutingMethod": "[parameters('trafficRoutingMethod')]",
+        "dnsConfig": {
+          "relativeName": "[parameters('trafficManagerRelativeName')]",
+          "ttl": 30
+        },
+        "monitorConfig": {
+          "protocol": "HTTPS",
+          "port": 443,
+          "path": "/"
+        },
+        "endpoints": [
+          {
+            "name": "[concat(parameters('deploymentId'), '-cd-US-endpoint')]",
+            "type": "Microsoft.Network/trafficManagerProfiles/azureEndpoints",
+            "properties": {
+              "endpointStatus": "Enabled",
+              "targetResourceId": "[resourceId('Microsoft.Web/sites', variables('cdWebAppNameTidy'))]",
+              "target": "[concat('Microsoft.Web/sites/', variables('cdWebAppNameTidy'))]",
+              "weight": 1,
+              "priority": 2,
+              "endpointLocation": "[parameters('cd.ase.location')]"
+            }
+          },
+          {
+            "name": "[concat(parameters('deploymentId'), '-cd-EU-endpoint')]",
+            "type": "Microsoft.Network/trafficManagerProfiles/azureEndpoints",
+            "properties": {
+              "endpointStatus": "Enabled",
+              "targetResourceId": "[resourceId('Microsoft.Web/sites', variables('cmWebAppNameTidy'))]",
+              "target": "[concat('Microsoft.Web/sites/', variables('cmWebAppNameTidy'))]",
+              "weight": 1,
+              "priority": 3,
+              "endpointLocation": "[parameters('location')]"
+            }
+          }
+        ]
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', variables('cmWebAppNameTidy'))]",
+        "[resourceId('Microsoft.Web/sites', variables('cdWebAppNameTidy'))]"
+      ]
+    }
+
+
+
+
 
 
 
