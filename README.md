@@ -12,7 +12,7 @@ This template is for testing purposes only and deploys a Sitecore environment wi
 
 Visualize: 
 [Infrastructure](http://armviz.io/#/load=https%3A%2F%2Fraw.githubusercontent.com%2Fdavesamuelson%2Ftesting%2Fmaster%2Fasev1%2Fnested/infrastructure.json),
-[Application deployment](http://armviz.io/#/load=https%3A%2F%2Fraw.githubusercontent.com%2Fdavesamuelson%2Ftesting%2Fmaster%2Fasev1%2Fnested/application.json)
+[Application](http://armviz.io/#/load=https%3A%2F%2Fraw.githubusercontent.com%2Fdavesamuelson%2Ftesting%2Fmaster%2Fasev1%2Fnested/application.json)
 
 
 
