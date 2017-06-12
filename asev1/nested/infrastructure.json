@@ -755,6 +755,7 @@
       "type": "Microsoft.Web/hostingEnvironments",
       "location": "[parameters('cm.ase.Location')]",
       "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('cmvnetName'))]"
       ],
       "properties": {
         "name": "[parameters('cmappServiceEnvironmentName')]",
@@ -791,6 +792,7 @@
       "type": "Microsoft.Web/hostingEnvironments",
       "location": "[parameters('cd.ase.Location')]",
       "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('cdvnetName'))]"
       ],
       "properties": {
         "name": "[parameters('cdappServiceEnvironmentName')]",
