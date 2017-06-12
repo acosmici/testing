@@ -7,6 +7,7 @@ This template is for testing purposes only and deploys a Sitecore environment wi
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fdavesamuelson%2Ftesting%2Fmaster%2Fasev1%2Fazuredeploy.json" target="_blank">
 <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
+</br>
 Visualize: 
 [Infrastructure](http://armviz.io/#/load=https://raw.githubusercontent.com/davesamuelson%2Ftesting%2Fmaster%2Fasev1%2Fnested/infrastructure.json),
 [Application deployment](http://armviz.io/#/load=https://raw.githubusercontent.com/davesamuelson%2Ftesting%2Fmaster%2Fasev1%2Fnested/application.json)
