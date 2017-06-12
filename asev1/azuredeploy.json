@@ -71,12 +71,12 @@
     "sqlserver.login": {
       "type": "string",
       "minLength": 1,
-      "defaultValue": "davsamu"
+      "defaultValue": "aamsql"
     },
     "sqlserver.password": {
       "type": "securestring",
       "minLength": 8,
-      "defaultValue": "Cameron#12345"
+      "defaultValue": "SqlAAM#1"
     },
     "web.sqlserver.login": {
       "type": "string",
