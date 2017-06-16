@@ -34,7 +34,7 @@
     },
     "deployVNet": {
       "type": "string",
-      "defaultValue": "Yes",
+      "defaultValue": "No",
       "allowedValues": [
         "Yes",
         "No - use an existing VNet"
@@ -563,36 +563,6 @@
         "description": "The name of the Resource Group to which the VNET for CD has been deployed"
       }
     },
-    "cmVNetAddressSpace": {
-      "type": "string",
-      "defaultValue": "10.8.0.0/16",
-      "metadata": {
-        "description": "The VNet address space for the CM VNet"
-      }
-    },
-    "cmSubnetAddress": {
-      "type": "string",
-      "defaultValue": "10.8.1.0/24",
-      "metadata": {
-        "description": "The Subnet address space for the CM VNet"
-      }
-    },
-
-    "cdVNetAddressSpace": {
-      "type": "string",
-      "defaultValue": "10.10.0.0/16",
-      "metadata": {
-        "description": "The VNet address space for the CD VNet"
-      }
-    },
-    "cdSubnetAddress": {
-      "type": "string",
-      "defaultValue": "10.10.1.0/24",
-      "metadata": {
-        "description": "The Subnet address space for the CD VNet"
-      }
-    },
-
     "cmsubnetName": {
       "type": "string",
       "defaultValue": "cmsubnetName",
