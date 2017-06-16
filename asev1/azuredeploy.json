@@ -1026,19 +1026,6 @@
           "cdappServiceEnvironmentName": {
             "value": "[parameters('cdappServiceEnvironmentName')]"
           },
-          "cmVNetAddressSpace": {
-            "value": "[parameters('cmVNetAddressSpace')]"
-          },
-          "cmSubnetAddress": {
-            "value": "[parameters('cmSubnetAddress')]"
-          },
-
-          "cdVNetAddressSpace": {
-            "value": "[parameters('cdVNetAddressSpace')]"
-          },
-          "cdSubnetAddress": {
-            "value": "[parameters('cdSubnetAddress')]"
-          },
           "sitecoreSKU": {
             "value": "[parameters('sitecoreSKU')]"
           }
